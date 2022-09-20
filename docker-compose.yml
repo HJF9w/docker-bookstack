@@ -1,9 +1,9 @@
-version: '2'
+version: '3'
 services:
   mysql:
-    image: mysql:8.0
+    image: mysql
     environment:
-    - MYSQL_ROOT_PASSWORD=secret
+    - MYSQL_ALLOW_EMPTY_PASSWORD=1
     - MYSQL_DATABASE=bookstack
     - MYSQL_USER=bookstack
     - MYSQL_PASSWORD=secret
@@ -11,7 +11,10 @@ services:
     - mysql-data:/var/lib/mysql
 
   bookstack:
-    image: solidnerd/bookstack:22.09.1
+    image: bookstack:22.09.1
+    build:
+      context: ./
+      dockerfile: Dockerfile
     depends_on:
     - mysql
     environment:
@@ -20,7 +23,7 @@ services:
     - DB_USERNAME=bookstack
     - DB_PASSWORD=secret
     #set the APP_ to the URL of bookstack without without a trailing slash APP_URL=https://example.com
-    - APP_URL=http://example.com
+    - APP_URL=http://localhost:8080
     volumes:
     - uploads:/var/www/bookstack/public/uploads
     - storage-uploads:/var/www/bookstack/storage/uploads
