@@ -7,7 +7,7 @@ RUN set -x; \
     && tar xvf bookstack.tar.gz -C /bookstack --strip-components=1 \
     && rm bookstack.tar.gz
 
-FROM php:8.1.13-apache-bullseye as final
+FROM php:8.2-apache-bullseye as final
 RUN set -x; \
     apt-get update \
     && apt-get install -y --no-install-recommends \
