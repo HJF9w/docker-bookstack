@@ -28,8 +28,8 @@ RUN set -x; \
         libzip-dev \
         unzip \
     && arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) \
-	&& wget "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_${arch}.deb" \
-	&& chmod a+x "./wkhtmltox_0.12.6-1.buster_${arch}.deb" \
+    && wget "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_${arch}.deb" \
+    && chmod a+x "./wkhtmltox_0.12.6-1.buster_${arch}.deb" \
     && apt-get install -y "./wkhtmltox_0.12.6-1.buster_${arch}.deb" \
     && rm "./wkhtmltox_0.12.6-1.buster_${arch}.deb" \
     && docker-php-ext-install -j$(nproc) dom pdo pdo_mysql zip tidy  \
