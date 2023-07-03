@@ -1,5 +1,5 @@
 FROM alpine:3 as bookstack
-ENV BOOKSTACK_VERSION=23.6
+ENV BOOKSTACK_VERSION=23.06
 RUN apk add --no-cache curl tar
 RUN set -x; \
     curl -SL -o bookstack.tar.gz https://github.com/BookStackApp/BookStack/archive/v${BOOKSTACK_VERSION}.tar.gz  \
@@ -7,7 +7,7 @@ RUN set -x; \
     && tar xvf bookstack.tar.gz -C /bookstack --strip-components=1 \
     && rm bookstack.tar.gz
 
-FROM php:8.2-apache-bullseye as final
+FROM php:8.2-apache-bookworm as final
 RUN set -x; \
     apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -28,10 +28,10 @@ RUN set -x; \
         libzip-dev \
         unzip \
     && arch=$(arch | sed s/aarch64/arm64/ | sed s/x86_64/amd64/) \
-    && wget "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_${arch}.deb" \
-    && chmod a+x "./wkhtmltox_0.12.6-1.buster_${arch}.deb" \
-    && apt-get install -y "./wkhtmltox_0.12.6-1.buster_${arch}.deb" \
-    && rm "./wkhtmltox_0.12.6-1.buster_${arch}.deb" \
+    && wget -O wkhtmltox.deb "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_${arch}.deb" \
+    && chmod a+x "./wkhtmltox.deb" \
+    && apt-get install -y "./wkhtmltox.deb" \
+    && rm "./wkhtmltox.deb" \
     && docker-php-ext-install -j$(nproc) dom pdo pdo_mysql zip tidy  \
     && docker-php-ext-configure ldap \
     && docker-php-ext-install -j$(nproc) ldap \
