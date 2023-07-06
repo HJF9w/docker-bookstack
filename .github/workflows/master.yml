@@ -123,4 +123,3 @@ jobs:
         labels: ${{ steps.docker_meta.outputs.labels }}
         cache-from: type=registry,ref=solidnerd/bookstack-dev:${{ github.sha }}
         cache-to: type=registry,ref=solidnerd/bookstack-dev:${{ github.sha }}
-
