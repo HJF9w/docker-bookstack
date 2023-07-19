@@ -19,7 +19,11 @@ IFS=":" read -r DB_HOST_NAME DB_PORT <<< "$DB_HOST"
 DB_PORT=${DB_PORT:-3306}
 
 # Ensure these is no local .env file
-[ -f ".env" ] && rm .env
+if [ -f ".env" ]; then
+  mv .env .env.bak
+  echoerr ".env file detected - moved to .env.bak"
+  echoerr "Please update your configuration to use environment variables in the container!"
+fi
 
 # Check a number of essential variables are set
 check_vars_exist \
@@ -47,9 +51,6 @@ if [ $RESULT -eq 0 ]; then
 else
   echoerr "wait-for-db: timeout out after 15 seconds waiting for ${DB_HOST_NAME}:${DB_PORT}"
 fi
-
-echo "Generating Key..."
-php artisan key:generate --show
 
 echo "Starting Migration..."
 php artisan migrate --force
