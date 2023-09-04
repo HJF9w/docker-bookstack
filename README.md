@@ -6,7 +6,8 @@
 
 ## Changes
 
-Version 23.08 added a [Server Side Request Allow List](https://www.bookstackapp.com/docs/admin/security/#server-side-request-allow-list), configurable in the .env file with `ALLOWED_SSR_HOSTS`, in case the trusted (admin-level) users should not be able to freely make server side requests.
+For more information, visit:
+#### https://www.bookstackapp.com/docs/admin/updates/
 
 Versions higher than 23.06.2 no longer use an in-container `.env` file for
 environment variable management. Instead, the preferred approach is to manage
