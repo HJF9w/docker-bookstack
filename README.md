@@ -1,3 +1,4 @@
+WTF
 # Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
 
 ![Build Status](https://img.shields.io/github/actions/workflow/status/solidnerd/docker-bookstack/master.yml)
