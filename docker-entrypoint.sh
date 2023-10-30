@@ -42,7 +42,6 @@ if [ -n "${FILE_UPLOAD_SIZE_LIMITS}" ]; then
   echo "https://github.com/solidnerd/docker-bookstack/issues/423"
 fi
 
-
 echoerr "wait-for-db: waiting for ${DB_HOST_NAME}:${DB_PORT}"
 
 timeout 15 bash <<EOT
