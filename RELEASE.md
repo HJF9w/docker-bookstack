@@ -6,12 +6,12 @@ It may also be useful to update documentation references at the same time.
 
 ## Example
 
-For Bookstack version 24.02.3:
+For Bookstack version 24.05:
 
 ```shell
-sed -i '' -e 's/22.11.1/24.02.3/g' *     # 22.11.1 was the previous version
-git commit -am "Update references to version 24.02.3" [-S]
-git tag [-s] -a 24.02.3 -m "Release version 23.08.3"
+sed -i '' -e 's/22.11.1/24.05/g' *     # 22.11.1 was the previous version
+git commit -am "Update references to version 24.05" [-S]
+git tag [-s] -a 24.05 -m "Release version 23.08.3"
 git push --tags
 ```
 
