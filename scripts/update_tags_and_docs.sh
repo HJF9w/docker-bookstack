@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 # Get the root of the Git repository in order to correctly path e.g. Dockerfile
