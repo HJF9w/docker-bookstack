@@ -6,10 +6,10 @@
 
 ## Changes
 
-For more information, visit:
-#### https://www.bookstackapp.com/docs/admin/updates/
+Users of version 24.2.3 should switch to 24.2.3-1 (or higher); a maintainer
+erroneously set image tag 24.2.3 to use 23.2.3 as the release.
 
-Versions higher than 23.06.2 no longer use an in-container `.env` file for
+Versions higher than 23.6.2 no longer use an in-container `.env` file for
 environment variable management. Instead, the preferred approach is to manage
 them directly with the container runtime (e.g. Docker's `-e`). This is to
 simplify troubleshooting if and when errors occur. The most important change is
@@ -33,7 +33,7 @@ In 0.12.2 we removed `DB_PORT` . You can now specify the port via `DB_HOST` like
 With Docker Compose is a Quickstart very easy. Run the following command:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 and after that open your Browser and go to
