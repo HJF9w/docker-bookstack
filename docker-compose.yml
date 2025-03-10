@@ -1,5 +1,4 @@
 # default username admin@admin.com password password
-version: '3'
 services:
   mysql:
     image: mysql:9.2
