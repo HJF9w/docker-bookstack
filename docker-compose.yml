@@ -13,7 +13,7 @@ services:
 
   bookstack:
     image: solidnerd/bookstack:master
-#    image: bookstack:24.12.1
+#    image: bookstack:25.02
 #    build:
 #      context: ./
 #      dockerfile: Dockerfile
