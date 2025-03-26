@@ -48,32 +48,6 @@ If you have any issues feel free to create an [issue on GitHub](https://github.c
 
 Note that if you want to use LDAP, `$` has to be escape like `\$`, i.e. `-e "LDAP_USER_FILTER"="(&(uid=\${user}))"`
 
-Networking changed in Docker v1.9, so you need to do one of the following steps.
-
-### Docker < v1.9
-
-1. MySQL Container:
-
-   ```bash
-   docker run -d \
-   -p 3306:3306 \
-   -e MYSQL_ROOT_PASSWORD=secret \
-   -e MYSQL_DATABASE=bookstack \
-   -e MYSQL_USER=bookstack \
-   -e MYSQL_PASSWORD=secret \
-   --name bookstack_db \
-   mysql:9.2.0
-   ```
-
-2. BookStack Container:
-
-   ```bash
-   docker run -d --link bookstack_db_:mysql \
-   -p 8080:8080 \
-   --name bookstack_25.02.1 \
-   solidnerd/bookstack:25.02.1
-   ```
-
 ### Docker 1.9+
 
 1. Create a shared network:
@@ -102,16 +76,17 @@ Networking changed in Docker v1.9, so you need to do one of the following steps.
    -e DB_DATABASE=bookstack \
    -e DB_USERNAME=bookstack \
    -e DB_PASSWORD=secret \
-   -e APP_URL=http://example.com \
+   -e APP_URL=http://localhost:8080 \
+   -e APP_KEY=SomeRandomStringWith32Characters \
    -p 8080:8080 \
-   --name="bookstack_25.02.1" \
-    solidnerd/bookstack:25.02.1
+   --name="bookstack_25.2.1" \
+    solidnerd/bookstack:25.2.1
    ```
 
     The APP_URL parameter should be the base URL for your BookStack instance without
-    a trailing slash. For example:
+    a trailing slash, but including any port numbers. For example:
 
-    `APP_URL=http://example.com`
+    `APP_URL=http://example.com` or `APP_URL=http://localhost:8080`.
 
     The following environment variables are required for Bookstack to start:
     - `APP_KEY`
@@ -123,18 +98,14 @@ Networking changed in Docker v1.9, so you need to do one of the following steps.
 
 ### Volumes
 
-To access your `.env` file and important bookstack folders on your host system
-change `<HOST>` in the following line to your host directory and add it then to
-your run command:
+To access your important bookstack folders on your host system change `<HOST>`
+in the following line to your host directory and add it then to your run
+command:
 
 ```bash
---mount type=bind,source=<HOST>/.env,target=/var/www/bookstack/.env \
 -v <HOST>:/var/www/bookstack/public/uploads \
 -v <HOST>:/var/www/bookstack/storage/uploads
 ```
-
-In case of a windows host machine the .env file has to be already created in the
-host directory otherwise a folder named .env will be created.
 
 After these steps you can visit [http://localhost:8080](http://localhost:8080).
 You can login with username `admin@admin.com` and password `password`.
