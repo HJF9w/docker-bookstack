@@ -13,9 +13,7 @@ services:
 
   app:
     #image: bookstack:25.05.2
-    build:
-      context: /
-      dockerfile: Dockerfile
+    build: .
     depends_on:
     - mysql
     environment:
