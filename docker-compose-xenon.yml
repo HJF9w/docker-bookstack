@@ -14,8 +14,6 @@ services:
   app:
     #image: bookstack:25.07
     build: .
-      tags:
-        - "bookstack:25.07"
     depends_on:
     - mysql
     environment:
