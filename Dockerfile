@@ -27,7 +27,7 @@ RUN set -x; \
         curl \
         libzip-dev \
         unzip \
-    && docker-php-ext-install -j$(nproc) dom pdo pdo_mysql zip tidy  \
+    && docker-php-ext-install -j$(nproc) pdo pdo_mysql zip tidy  \
     && docker-php-ext-configure ldap \
     && docker-php-ext-install -j$(nproc) ldap \
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
@@ -50,12 +50,9 @@ COPY bookstack.conf /etc/apache2/sites-available/000-default.conf
 
 COPY --from=bookstack --chown=33:33 /bookstack/ /var/www/bookstack/
 
-ARG COMPOSER_VERSION=2.7.6
 RUN set -x; \
     cd /var/www/bookstack \
-    && curl -sS https://getcomposer.org/installer | php -- --version=$COMPOSER_VERSION \
-    && /var/www/bookstack/composer.phar install -v -d /var/www/bookstack/ \
-    && rm -rf /var/www/bookstack/composer.phar /root/.composer \
+    && ./bookstack-system-cli download-vendor \
     && chown -R www-data:www-data /var/www/bookstack
 
 COPY php.ini /usr/local/etc/php/php.ini
