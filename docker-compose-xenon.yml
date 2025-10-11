@@ -6,6 +6,8 @@ services:
     - MYSQL_DATABASE=bookstack
     - MYSQL_USER=bookstack
     - MYSQL_PASSWORD=secret
+    env_file:
+      - ".env"
     volumes:
     - '${BASEPATH}/${COMPOSE_PROJECT_NAME}/mysql-data:/var/lib/mysql'
     networks:
@@ -16,6 +18,8 @@ services:
     build: .
     depends_on:
     - mysql
+    env_file:
+      - ".env"
     environment:
     - DB_HOST=mysql:3306
     - DB_DATABASE=bookstack
