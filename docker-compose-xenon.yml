@@ -14,7 +14,7 @@ services:
       default:
 
   app:
-    #image: bookstack:25.11.6
+    #image: bookstack:25.12
     build: .
     depends_on:
     - mysql
