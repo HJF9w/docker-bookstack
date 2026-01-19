@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
 
     - name: Set up CI Image Metadata
       id: docker_meta_ci
@@ -37,7 +37,7 @@ jobs:
         outputs: type=docker,dest=/tmp/image-bookstack.tar
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: image-bookstack-master
         path: /tmp/image-bookstack.tar
@@ -48,10 +48,10 @@ jobs:
     needs: build
     steps:
     - name: Checkout
-      uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
 
     - name: Download artifact
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v7
       with:
         name: image-bookstack-master
         path: /tmp
@@ -66,7 +66,7 @@ jobs:
     needs: e2e
     steps:
     - name: Checkout
-      uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
 
     - name:  Set up Docker Hub Image Metadata
       id: docker_meta
@@ -81,7 +81,7 @@ jobs:
           type=ref,event=branch
 
     - name: Download artifact
-      uses: actions/download-artifact@v6
+      uses: actions/download-artifact@v7
       with:
         name: image-bookstack-master
         path: /tmp
