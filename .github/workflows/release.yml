@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
     - name: Set up CI Image Metadata
       id: docker_meta_ci
@@ -37,7 +37,7 @@ jobs:
         outputs: type=docker,dest=/tmp/image-bookstack.tar
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: image-bookstack-master
         path: /tmp/image-bookstack.tar
@@ -47,10 +47,10 @@ jobs:
     needs: build
     steps:
     - name: Checkout
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
     - name: Download artifact
-      uses: actions/download-artifact@v7
+      uses: actions/download-artifact@v8
       with:
         name: image-bookstack-master
         path: /tmp
@@ -65,7 +65,7 @@ jobs:
     needs: e2e
     steps:
     - name: Checkout
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
     - name:  Set up Docker Hub Image Metadata
       id: docker_meta
@@ -87,7 +87,7 @@ jobs:
           type=semver,pattern={{major}}.{{minor}}.{{patch}}
 
     - name: Download artifact
-      uses: actions/download-artifact@v7
+      uses: actions/download-artifact@v8
       with:
         name: image-bookstack-master
         path: /tmp
@@ -130,13 +130,20 @@ jobs:
         cache-from: type=registry,ref=solidnerd/bookstack-dev:${{ github.sha }}
         cache-to: type=registry,ref=solidnerd/bookstack-dev:${{ github.sha }}
 
+    - name: Update repo description
+      uses: peter-evans/dockerhub-description@1b9a80c056b620d92cedb9d9b5a223409c68ddfa # v5.0.0
+      with:
+        username: ${{ vars.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: solidnerd/bookstack
+
   create-release:
     runs-on: ubuntu-24.04
     needs: push
     steps:
       # To use this repository's private action, you must check out the repository
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       - name: Generate changelog
         id: changelog
