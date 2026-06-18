@@ -3,8 +3,8 @@ name: "bookstack"
 #repository_url: https://github.com/HJF9w/docker-bookstack.git
 #reference: master
 #working_dir: .
-#reconciliation:
-#  enabled: false
+reconciliation:
+  enabled: true
 #  events:
 #    - die
 #    - destroy
